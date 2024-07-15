@@ -1,6 +1,9 @@
 namespace Cookos;
 
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
+using NodeArray = Godot.Collections.Array<Godot.Node>;
 
 public static class NodeExtensions
 {
@@ -15,6 +18,34 @@ public static class NodeExtensions
         }
 
         return null;
+    }
+
+    public static IEnumerable<T> GetChildrenOfType<T>(this Node node) where T : class
+    {
+        var children = new NodeArray(node.GetChildren());
+
+        return children.OfType<T>();
+    }
+
+    public static IEnumerable<T> GetChildrenOfTypeRecursively<T>(this Node node) where T : class
+    {
+        var result = new HashSet<T>();
+
+        recurse(node);
+
+        void recurse(Node currentNode)
+        {
+            result.UnionWith(currentNode.GetChildrenOfType<T>());
+
+            var children = new NodeArray(currentNode.GetChildren());
+
+            foreach (var c in children)
+            {
+                recurse(c);
+            }
+        }
+
+        return result;
     }
 
     public static T GetParentRecursively<T>(this Node node) where T : class

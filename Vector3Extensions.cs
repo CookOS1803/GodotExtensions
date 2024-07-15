@@ -18,4 +18,12 @@ public static class Vector3Extensions
 
         return barycenter;
     }
+
+    public static void Add(this IList<Vector3> points, Vector3 delta)
+    {
+        for (int i = 0; i < points.Count; i++)
+        {
+            points[i] += delta;
+        }
+    }
 }
