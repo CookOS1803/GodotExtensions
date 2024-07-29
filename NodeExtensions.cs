@@ -69,4 +69,9 @@ public static class NodeExtensions
         oldParent.RemoveChild(node);
         parent.AddChild(node);
     }
+
+    public static void AddSibling(this Node node, Node sibling)
+    {
+        node.GetParent().AddChild(sibling);
+    }
 }
