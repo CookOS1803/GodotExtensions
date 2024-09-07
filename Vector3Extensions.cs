@@ -26,4 +26,11 @@ public static class Vector3Extensions
             points[i] += delta;
         }
     }
+
+    public static bool IsEqualApprox(this Vector3 self, Vector3 other, float tolerance)
+    {
+        return Mathf.IsEqualApprox(self.x, other.x, tolerance) &&
+               Mathf.IsEqualApprox(self.y, other.y, tolerance) &&
+               Mathf.IsEqualApprox(self.z, other.z, tolerance);
+    }
 }
