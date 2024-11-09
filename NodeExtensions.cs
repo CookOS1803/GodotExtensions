@@ -74,4 +74,9 @@ public static class NodeExtensions
     {
         node.GetParent().AddChild(sibling);
     }
+
+    public static T? GetNodeOrNullable<T>(this Node node, NodePath? path) where T : class
+    {
+        return path == null ? null : node.GetNodeOrNull<T>(path);
+    }
 }
