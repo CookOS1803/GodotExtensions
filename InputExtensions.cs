@@ -1,6 +1,6 @@
-namespace Cookos;
-
 using Godot;
+
+namespace Cookos;
 
 public static class InputExtensions
 {

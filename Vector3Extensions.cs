@@ -1,18 +1,14 @@
-namespace Cookos;
-
+using System.Linq;
 using System.Collections.Generic;
 using Godot;
+
+namespace Cookos;
 
 public static class Vector3Extensions
 {
     public static Vector3 Barycenter(this ICollection<Vector3> points)
     {
-        var sum = Vector3.Zero;
-
-        foreach (var point in points)
-        {
-            sum += point;
-        }
+        var sum = points.Aggregate(Vector3.Zero, (current, point) => current + point);
 
         var barycenter = sum / points.Count;
 
@@ -21,7 +17,7 @@ public static class Vector3Extensions
 
     public static void Add(this IList<Vector3> points, Vector3 delta)
     {
-        for (int i = 0; i < points.Count; i++)
+        for (var i = 0; i < points.Count; i++)
         {
             points[i] += delta;
         }
